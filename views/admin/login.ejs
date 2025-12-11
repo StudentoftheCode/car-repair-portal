@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Repair Admin Login</title>
+
+    <link rel="stylesheet" href="css/admin/style.css">
+</head>
+<body>
+    <section class="center">
+    <main class="container container-alt">
+      <section class="auth-section">
+        <% if (locals.messages.errors) { %>
+          <% messages.errors.forEach(el => { %>
+            <div class="alert alert-danger"><%= el.msg %></div>
+          <% }) %>
+        <% } %>
+  
+        <% if (locals.messages.info) { %>
+          <% messages.info.forEach(el => { %>
+            <div class="alert alert-info"><%= el.msg %></div>
+          <% }) %>
+        <% } %>
+  
+        <form action="/admin/login" method="POST" class="auth-form">
+          <label>
+            <span>Username</span>
+            <input
+              type="username"
+              name="username"
+              placeholder=""
+              required
+            />
+          </label>
+          <label>
+            <span>Password</span>
+            <input
+              type="password"
+              name="password"
+              placeholder=""
+              required
+            />
+          </label>
+          <!-- <div class="hero-buttons">
+            <a href="/signup" class="btn alt">Signup</a>
+          </div> -->
+          <button type="submit">Log In</button>
+        </form>
+      </section>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Invoice - <%= repair.customerName %></title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 25px;
+            color: #000;
+        }
+
+        h1, h2, h3 {
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .section {
+            margin-top: 25px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        table th, table td {
+            border: 1px solid #666;
+            padding: 10px;
+            text-align: left;
+        }
+
+        table th {
+            background: #eee;
+        }
+
+        .totals {
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .totals td {
+            padding: 6px 0;
+        }
+
+        .signature-area {
+            margin-top: 50px;
+        }
+
+        .signature-line {
+            margin-top: 45px;
+            border-top: 1px solid #000;
+            width: 300px;
+            text-align: center;
+            padding-top: 5px;
+        }
+
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="no-print">
+        <button onclick="window.print()" style="padding:10px 20px;font-size:16px;">Print Invoice</button>
+    </div>
+
+    <div class="header">
+        <h1>Repair Invoice</h1>
+        <h3><%= repair.make %> <%= repair.model %> (<%= repair.year %>)</h3>
+    </div>
+
+    <!-- Customer & Vehicle Info -->
+    <div class="section">
+        <h2>Customer Information</h2>
+        <p><strong>Name:</strong> <%= repair.customerName %></p>
+        <p><strong>Phone:</strong> <%= repair.phoneNumber %></p>
+        <p><strong>VIN:</strong> <%= repair.vin %></p>
+        <p><strong>Date Brought In:</strong> <%= repair.dateBroughtIn.toDateString() %></p>
+        <p><strong>Status:</strong> <%= repair.status %></p>
+    </div>
+
+    <!-- Notes / Parts / Charges Table -->
+    <div class="section">
+        <h2>Parts & Services</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Description</th>
+                    <th>Part</th>
+                    <th>Qty</th>
+                    <th>Price (Each)</th>
+                    <th>Line Total</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <% let subtotal = 0; %>
+
+                <% notes.forEach(n => { 
+                    const lineTotal = (n.quantity || 1) * (n.price || 0);
+                    subtotal += lineTotal;
+                %>
+
+                <tr>
+                    <td><%= n.description %></td>
+                    <td><%= n.part || "" %></td>
+                    <td><%= n.quantity %></td>
+                    <td>$<%= n.price.toFixed(2) %></td>
+                    <td>$<%= lineTotal.toFixed(2) %></td>
+                </tr>
+
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Totals Section -->
+    <div class="section">
+        <h2>Totals</h2>
+
+        <table class="totals">
+            <tr>
+                <td><strong>Subtotal:</strong></td>
+                <td>$<%= subtotal.toFixed(2) %></td>
+            </tr>
+
+            <% const taxRate = 0.00; %> <!-- Set to 0 if no tax -->
+            <% const taxAmount = subtotal * taxRate; %>
+
+            <% if(taxRate > 0) { %>
+            <tr>
+                <td><strong>Tax (<%= (taxRate * 100).toFixed(1) %>%)</strong></td>
+                <td>$<%= taxAmount.toFixed(2) %></td>
+            </tr>
+            <% } %>
+
+            <tr>
+                <td><strong>Total:</strong></td>
+                <td><strong>$<%= (subtotal + taxAmount).toFixed(2) %></strong></td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Signature Section -->
+    <div class="section signature-area">
+        <h2>Customer Authorization</h2>
+        <p>
+            I authorize the above repairs and acknowledge the total amount listed.
+            I understand the final amount may vary if additional issues are discovered.
+        </p>
+
+        <div class="signature-line">
+            Customer Signature
+        </div>
+
+        <p>Date: ____________________________</p>
+    </div>
+
+</body>
+</html>

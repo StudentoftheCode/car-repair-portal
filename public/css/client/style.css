@@ -1,0 +1,57 @@
+ body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+    }
+    header {
+      background: #222;
+      color: #fff;
+      padding: 20px 0;
+      text-align: center;
+    }
+    nav a {
+      color: #fff;
+      margin: 0 15px;
+      text-decoration: none;
+    }
+    .hero {
+      background: url('/images/garage.jpg') no-repeat center center/cover;
+      color: white;
+      height: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      flex-direction: column;
+    }
+    .hero h1 {
+      font-size: 3em;
+      margin-bottom: 10px;
+    }
+    .hero p {
+      font-size: 1.2em;
+    }
+    .section {
+      padding: 40px 20px;
+      text-align: center;
+    }
+    .services {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+    }
+    .service {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      width: 250px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    footer {
+      background: #333;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      margin-top: 40px;
+    }
