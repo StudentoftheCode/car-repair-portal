@@ -42,8 +42,8 @@ app.use(passport.session());
 
 app.use(flash());
 
-app.use('/', clientRoutes);
-app.use('/admin', adminRoutes);
+// app.use('/', clientRoutes);
+app.use('/', adminRoutes);
 
 app.listen(process.env.PORT, () => {
   console.log('Server is running');
