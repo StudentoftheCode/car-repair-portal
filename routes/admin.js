@@ -17,7 +17,7 @@ router.get('/', ensureGuest, adminAuthController.getIndex);
 
 // Login POST handler
 router.post(
-  '/login',
+  '/admin/login',
   passport.authenticate('local', {
     successRedirect: '/admin/dashboard',
     failureRedirect: '/admin',
@@ -39,26 +39,26 @@ router.post('/logout', (req, res, next) => {
 // =================
 
 // Dashboard (protected)
-router.get('/dashboard', ensureAuth, adminDashController.getIndex);
+router.get('/admin/dashboard', ensureAuth, adminDashController.getIndex);
 
 // Add Job
-router.post('/add-job', ensureAuth, adminDashController.postAddJob);
+router.post('/admin/add-job', ensureAuth, adminDashController.postAddJob);
 
 // Update Job Status
-router.post('/job/:id/update', ensureAuth, adminDashController.updateJobStatus);
+router.post('/admin/job/:id/update', ensureAuth, adminDashController.updateJobStatus);
 
 // Notes JSON fetch route (used by dashboard modal)
-router.get('/job/:id/notes/json', ensureAuth, adminDashController.getNotesJSON);
+router.get('/admin/job/:id/notes/json', ensureAuth, adminDashController.getNotesJSON);
 
 // Search Jobs
-router.get('/search', ensureAuth, adminDashController.searchJobs);
+router.get('/admin/search', ensureAuth, adminDashController.searchJobs);
 
 // Notes
-router.post('/job/:id/notes', notesController.addNote);
-router.delete('/job/:id/notes/:noteId', notesController.deleteNote);
-router.put('/job/:id/notes/:noteId', notesController.updateNote);
+router.post('/admin/job/:id/notes', notesController.addNote);
+router.delete('/admin/job/:id/notes/:noteId', notesController.deleteNote);
+router.put('/admin/job/:id/notes/:noteId', notesController.updateNote);
 
 // Print View
-router.get('/job/:id/print', ensureAuth, dashboardController.printJob);
+router.get('/admin/job/:id/print', ensureAuth, dashboardController.printJob);
 
 module.exports = router;
