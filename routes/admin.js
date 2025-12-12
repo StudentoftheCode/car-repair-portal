@@ -26,7 +26,7 @@ router.post(
 );
 
 // Logout
-router.post('/logout', (req, res, next) => {
+router.post('/admin/logout', (req, res, next) => {
   req.logout(function (err) {
     if (err) return next(err);
     req.flash('info', 'You have been logged out.');
