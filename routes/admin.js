@@ -30,7 +30,7 @@ router.post('/admin/logout', (req, res, next) => {
   req.logout(function (err) {
     if (err) return next(err);
     req.flash('info', 'You have been logged out.');
-    res.redirect('/login');
+    res.redirect('/admin/login');
   });
 });
 
