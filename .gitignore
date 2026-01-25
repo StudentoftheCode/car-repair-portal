@@ -1,1 +1,9 @@
+# dependencies
+node_modules/
+
+# environment
 .env
+
+# builds
+dist/
+build/.DS_Store
