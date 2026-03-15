@@ -43,6 +43,9 @@ Database:
 App runs at:
 ➡️ http://localhost:3000
 
+Username: admin
+Password: admin123
+
  Print Job Feature
 
 Your application includes a dedicated print-friendly view (print-job.ejs) that displays:
