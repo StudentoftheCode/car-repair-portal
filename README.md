@@ -76,5 +76,3 @@ The page is styled to print cleanly using the browser’s print dialog.
 	•	Customer notifications
 	•	Photo upload per job
 	•	Activity logs
-
- 
